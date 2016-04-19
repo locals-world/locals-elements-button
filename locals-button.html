@@ -1,0 +1,226 @@
+<!--
+@license
+Copyright (c) 2016 A-labs. All rights reserved.
+/////////////////
+LOCALS
+/////////////////
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../locals-style/locals-style.html">
+<!--
+Buttons in the Locals-style. Example:
+
+    <locals-button> Button </locals-button>
+
+Add color or size as attribute to modify:
+
+    <locals-button small green> Small green button </locals-button>
+
+    <locals-button medium yellow> Medium yellow button </locals-button>
+    
+    <locals-button large blue> Large blue button </locals-button>
+
+
+Add outline="color" to make the outline-button (and add small or medium for size):
+
+    <locals-button small outline="green"> Small green outline button </locals-button>
+
+
+@demo demo/index.html
+@hero hero.svg
+-->
+
+<dom-module id="locals-button">
+  <template>
+    <style>
+      :host {
+        @apply(--opensans-light);
+        display: inline-block;
+        position: relative;
+        box-sizing: border-box;
+        padding: 10px 15px 10px 15px;
+        text-align: center;
+        outline-width: 0;
+        border-radius: 5px;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: pointer;
+        z-index: 0;
+        /* color is in general white, unless overwritten by specific class */
+        color:white;
+        box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
+        --outline-color: black;
+      }
+
+
+      /* Sizes */
+      :host([small]) {
+        font-size: 16px;    
+      };
+
+      :host([medium]) {
+        padding: 16px 24px 16px 24px;
+        font-size: 22px;    
+      };
+
+      :host([large]) {
+        padding: 25px 40px 25px 40px;
+        font-size: 38px;    
+      }
+
+
+      /* Colors + active-states */
+      :host([green]) {
+        color: black;
+        background-color: var(--locals-green);    
+      }
+      :host([green]):active {
+        background-color: var(--locals-green-darker);    
+      }
+
+      :host([red]) {
+        background-color: var(--locals-red);    
+      }
+      :host([red]):active {
+        background-color: var(--locals-red-darker);    
+      }
+
+      :host([yellow]) {
+        color: black;
+        background-color: var(--locals-yellow);    
+      }
+      :host([yellow]):active {
+        background-color: var(--locals-yellow-darker);    
+      }
+
+      :host([purple]) {
+        background-color: var(--locals-purple);    
+      }
+      :host([purple]):active {
+        background-color: var(--locals-purple-darker);    
+      }
+
+      :host([darkblue]) {
+        background-color: var(--locals-darkblue);    
+      }
+      :host([darkblue]):active {
+        background-color: var(--locals-darkblue-darker);    
+      }
+
+      :host([blue]) {
+        background-color: var(--locals-blue);    
+      }
+      :host([blue]):active {
+        background-color: var(--locals-blue-darker);    
+      }
+
+      :host([lightblue]) {
+        background-color: var(--locals-lightblue);    
+      }
+      :host([lightblue]):active {
+        background-color: var(--locals-lightblue-darker);    
+      }
+
+
+      /* Outline + active-states */
+      :host([outline][small]) {
+        color: var(--outline-color);
+        background: transparent;
+        border: 1px solid var(--outline-color);
+        @apply(--theme-font-reg);
+        box-shadow: none;
+      }
+      :host([outline][small]):active {
+        color: white;
+        background: var(--outline-color);
+        border: 1px solid var(--outline-color);
+        @apply(--theme-font-reg);
+      }
+
+      :host([outline][medium]) {
+        color: var(--outline-color);
+        background: transparent;
+        border: 2px solid var(--outline-color);
+        @apply(--theme-font-semibold);
+        box-shadow: none;
+      }
+      :host([outline][medium]):active {
+        color: white;
+        background: var(--outline-color);
+        border: 2px solid var(--outline-color);
+        @apply(--theme-font-semibold);
+      }
+
+      :host([disabled]) {
+        opacity: 0.5;
+        cursor: auto;
+        pointer-events: none;
+      }
+
+
+
+    </style>
+
+    <content></content>
+
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'locals-button',
+
+      properties: {
+
+        /**
+
+         */
+
+        outline: {
+          type:String,
+          value: 'blue',
+          observer: '_outline'
+        },
+      },
+
+      // Element Lifecycle
+
+      ready: function() {
+        // `ready` is called after all elements have been configured, but
+        // propagates bottom-up. This element's children are ready, but parents
+        // are not.
+        //
+        // This is the point where you should make modifications to the DOM (when
+        // necessary), or kick off any processes the element wants to perform.
+      },
+
+      attached: function() {
+        // `attached` fires once the element and its parents have been inserted
+        // into a document.
+        //
+        // This is a good place to perform any work related to your element's
+        // visual state or active behavior (measuring sizes, beginning animations,
+        // loading resources, etc).
+      },
+
+      detached: function() {
+        // The analog to `attached`, `detached` fires when the element has been
+        // removed from a document.
+        //
+        // Use this to clean up anything you did in `attached`.
+      },
+
+      _outline: function(outline) {
+        console.log(this.outline);
+        this.outlinecolor = 'var(--locals-'+this.outline+')';
+        this.customStyle['--outline-color'] = this.outlinecolor;
+        this.updateStyles();
+      }
+
+
+    });
+  </script>
+</dom-module>
