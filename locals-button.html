@@ -54,6 +54,8 @@ Add outline="color" to make the outline-button (and add small or medium for size
         color:black;
 /*        box-shadow: 2px 2px 0px rgba(0,0,0,0.2);*/
         --outline-color: black;
+        --txt-color: black;
+
         border-top: 1px solid rgba(0,0,0,0.1);
         border-right: 2px solid rgba(0,0,0,0.2);
         border-bottom: 2px solid rgba(0,0,0,0.2);
@@ -190,6 +192,20 @@ Add outline="color" to make the outline-button (and add small or medium for size
         pointer-events: none;
       }
 
+      :host([txtcolor][small]) {
+        color: var(--txt-color);
+        @apply(--opensans-bold);
+      }
+
+      :host([txtcolor]) {
+        color: var(--txt-color);
+        @apply(--opensans-semibold);
+      }
+
+      :host([txtcolor][large]) {
+        color: var(--txt-color);
+        @apply(--opensans-light);
+      }
 
 
     </style>
@@ -214,6 +230,13 @@ Add outline="color" to make the outline-button (and add small or medium for size
           value: 'blue',
           observer: '_outline'
         },
+
+        txtcolor: {
+          type:String,
+          value: 'darkgrey',
+          observer: '_txtcolor'
+        },
+
       },
 
       // Element Lifecycle
@@ -248,7 +271,18 @@ Add outline="color" to make the outline-button (and add small or medium for size
         this.outlinecolor = 'var(--locals-'+this.outline+')';
         this.customStyle['--outline-color'] = this.outlinecolor;
         this.updateStyles();
+      },
+
+
+
+      _txtcolor: function(txtcolor) {
+        console.log(this.txtcolor);
+        this.txtcolorcomplete = 'var(--locals-'+this.txtcolor+')';
+        this.customStyle['--txt-color'] = this.txtcolorcomplete;
+        this.updateStyles();
       }
+
+
 
 
     });
