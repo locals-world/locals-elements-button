@@ -208,6 +208,20 @@ Add outline="color" to make the outline-button (and add small or medium for size
       }
 
 
+
+      :host([img]) {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        box-sizing: border-box;
+        padding: 30px;
+        background-color: rgba(0,0,0,0.1);
+        border: none;
+        @apply(--layout-vertical);
+        @apply(--layout-center-center);
+      };
+
+
     </style>
 
     <content></content>
@@ -267,7 +281,7 @@ Add outline="color" to make the outline-button (and add small or medium for size
       },
 
       _outline: function(outline) {
-        console.log(this.outline);
+        // console.log(this.outline);
         this.outlinecolor = 'var(--locals-'+this.outline+')';
         this.customStyle['--outline-color'] = this.outlinecolor;
         this.updateStyles();
@@ -276,7 +290,7 @@ Add outline="color" to make the outline-button (and add small or medium for size
 
 
       _txtcolor: function(txtcolor) {
-        console.log(this.txtcolor);
+        // console.log(this.txtcolor);
         this.txtcolorcomplete = 'var(--locals-'+this.txtcolor+')';
         this.customStyle['--txt-color'] = this.txtcolorcomplete;
         this.updateStyles();
