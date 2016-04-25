@@ -8,6 +8,8 @@ LOCALS
 
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../locals-style/locals-style.html">
+<link rel="import" href="../locals-icon/locals-icon.html">
+
 <!--
 Buttons in the Locals-style. Example:
 
@@ -55,7 +57,7 @@ Add outline="color" to make the outline-button (and add small or medium for size
 /*        box-shadow: 2px 2px 0px rgba(0,0,0,0.2);*/
         --outline-color: black;
         --txt-color: black;
-
+        --bg-color: rgba(0,0,0,0.05);
         border-top: 1px solid rgba(0,0,0,0.1);
         border-right: 2px solid rgba(0,0,0,0.2);
         border-bottom: 2px solid rgba(0,0,0,0.2);
@@ -209,13 +211,13 @@ Add outline="color" to make the outline-button (and add small or medium for size
 
 
 
-      :host([img]) {
+      :host([icon]) {
         border-radius: 50%;
-        width: 100px;
-        height: 100px;
+        width: 60px;
+        height: 60px;
         box-sizing: border-box;
-        padding: 30px;
-        background-color: rgba(0,0,0,0.1);
+        padding: 18px;
+        background-color: var(--bg-color);
         border: none;
         @apply(--layout-vertical);
         @apply(--layout-center-center);
@@ -224,7 +226,13 @@ Add outline="color" to make the outline-button (and add small or medium for size
 
     </style>
 
+    <template is="dom-if" if="{{!iconbtn}}">
     <content></content>
+    </template>
+
+    <template is="dom-if" if="{{iconbtn}}">
+    <locals-icon icon="{{icon}}" iconcolor="{{txtcolor}}"></locals-icon>
+    </template>
 
 
   </template>
@@ -250,6 +258,21 @@ Add outline="color" to make the outline-button (and add small or medium for size
           value: 'darkgrey',
           observer: '_txtcolor'
         },
+
+        iconbtn: {
+          type:Boolean,
+          value: false
+        },  
+
+        icon: {
+          type:String,
+          observer: '_icon'
+        },
+
+        bg: {
+          type:String,
+          observer: '_bg'
+        },        
 
       },
 
@@ -294,6 +317,18 @@ Add outline="color" to make the outline-button (and add small or medium for size
         this.txtcolorcomplete = 'var(--locals-'+this.txtcolor+')';
         this.customStyle['--txt-color'] = this.txtcolorcomplete;
         this.updateStyles();
+      },
+
+
+      _icon: function(){
+        this.iconbtn = true;
+        console.log("it is a iconbtn:", this.iconbtn, "nl. this one=", this.icon);
+      },
+
+      _bg:function(){
+        this.bgcolor = 'var(--locals-'+this.bg+')';
+        this.customStyle['--bg-color'] = this.bgcolor;
+        this.updateStyles();    
       }
 
 
