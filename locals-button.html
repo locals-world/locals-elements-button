@@ -224,6 +224,14 @@ Add outline="color" to make the outline-button (and add small or medium for size
       };
 
 
+      :host([icon][outline]) {
+        color: var(--outline-color);
+        background: transparent;
+        border: 2px solid var(--outline-color);
+        box-shadow: none;
+      };
+
+
     </style>
 
     <template is="dom-if" if="{{!iconbtn}}">
